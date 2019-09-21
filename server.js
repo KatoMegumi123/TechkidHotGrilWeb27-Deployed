@@ -12,7 +12,7 @@ const upLoadRouter = require('./uploads/uploads.routes');
 
 mongoose.set('useFindAndModify', false);
 mongoose.set('useCreateIndex', true);
-mongoose.connect('mongodb://localhost:27017/hotgirls', { useNewUrlParser: true }, (e) => {
+mongoose.connect('mongodb+srv://Admin:Chz9p7VX5nQia4gL@cluster0-l9py8.mongodb.net/test?retryWrites=true&w=majority', { useNewUrlParser: true }, (e) => {
     if (e) {
         throw e;
     }
@@ -22,7 +22,7 @@ mongoose.connect('mongodb://localhost:27017/hotgirls', { useNewUrlParser: true }
         app.use(express.static('public'));
         app.use(bodyParser.json());
         app.use(cors({
-            origin: ["http://localhost:3000"],
+            origin: ["*"],
             credentials: true,
             methods: ['GET', 'PUT', 'POST'],
             allowedHeaders: ['Content-Type', 'Authorization'],
@@ -37,7 +37,13 @@ mongoose.connect('mongodb://localhost:27017/hotgirls', { useNewUrlParser: true }
         app.use('/posts', postsRouter);
         app.use('/uploads', upLoadRouter);
 
-        app.listen(3001, (error) => {
+        app.get('/test-deployment', (req,res)=>{
+            res.json({
+                success: true,
+            });
+        })
+
+        app.listen(process.env.PORT || 3001, (error) => {
             if (error) {
                 console.log(error);
             }
