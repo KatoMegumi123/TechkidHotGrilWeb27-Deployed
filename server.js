@@ -22,7 +22,7 @@ mongoose.connect('mongodb+srv://Admin:Chz9p7VX5nQia4gL@cluster0-l9py8.mongodb.ne
         app.use(express.static('public'));
         app.use(bodyParser.json());
         app.use(cors({
-            origin: ["*"],
+            origin: ["https://fathomless-mesa-79114.herokuapp.com"],
             credentials: true,
             methods: ['GET', 'PUT', 'POST'],
             allowedHeaders: ['Content-Type', 'Authorization'],
